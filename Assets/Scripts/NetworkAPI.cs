@@ -93,9 +93,11 @@ namespace NetworkAPI
                         {
                             // Skip processing if the sender is the local machine
                             continue;
+                        } else 
+                        {
+                            Log(message);
                         }
                         
-                        Log(message);
                     }
 
                 }

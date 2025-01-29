@@ -10,6 +10,7 @@ using System;
 
 public class MoveCubes : MonoBehaviour
 {
+    private float CUBE_HEIGHT = 1.0f;
     public GameObject localCube, remoteCube;
     public Vector3 localCubePos = new Vector3();
     public Vector3 remoteCubePos = new Vector3();
@@ -22,9 +23,13 @@ public class MoveCubes : MonoBehaviour
         messaging.Log += processMessage;
         (new Thread(new ThreadStart(messaging.ReceiveMessages))).Start();
         localCubePos.x = 1.0f;
-        localCubePos.y = 1.0f;
+        localCubePos.y = CUBE_HEIGHT/2;
         localCubePos.z = 1.0f;
-        remoteCube = GameObject.Find("CubeA"); localCube = GameObject.Find("CubeB");
+        remoteCubePos.x = -1.0f;
+        remoteCubePos.y = CUBE_HEIGHT/2;
+        remoteCubePos.z = 2.5f;
+        localCube = GameObject.Find("CubeA");
+        remoteCube = GameObject.Find("CubeB"); 
         remoteCube.transform.position = remoteCubePos;
         localCube.transform.position = localCubePos;
     }
@@ -36,7 +41,9 @@ public class MoveCubes : MonoBehaviour
             if (Input.GetKey(KeyCode.RightArrow)) { localCubePos.x += 0.1f; }
             if (Input.GetKey(KeyCode.LeftArrow)) { localCubePos.x -= 0.1f; }
             if (Input.GetKey(KeyCode.UpArrow)) { localCubePos.y += 0.1f; }
-            if (Input.GetKey(KeyCode.DownArrow)) { localCubePos.y -= 0.1f; }
+            if (Input.GetKey(KeyCode.DownArrow)) { 
+                float res = localCubePos.y -= 0.1f;
+                if (res < CUBE_HEIGHT/2) localCubePos.y = CUBE_HEIGHT/2; }
 
             localCube.transform.position = localCubePos;
             if (Vector3.Distance(localCubePos, remoteCubePos) < 2.0f)
@@ -46,18 +53,6 @@ public class MoveCubes : MonoBehaviour
         remoteCube.transform.position = remoteCubePos;
     }
     void OnDisable() { Debug.Log("OnDisable Called"); }
-
-    public void threadfunc()
-    {
-        float x = 1.0f, y = 1.0f, z = 1.0f;
-        while (true)
-        {
-            Thread.Sleep(1000);
-            remoteCubePos.x += 0.1f;
-            remoteCubePos.y += 1.0f;
-            remoteCubePos.z += 1.0f;
-        }
-    }
 
     public void processMessage(string message)
     {

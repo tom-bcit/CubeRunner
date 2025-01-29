@@ -37,6 +37,8 @@ public class MoveCubes : MonoBehaviour
     void Update()
     {
         bool isGrounded = localCube.transform.position.y <= CUBE_HEIGHT / 2;
+        if (isGrounded) RemoveVerticalVelocity();
+        else
         localCubePos.y = localCube.transform.position.y;
         if (Input.anyKey)
         {
@@ -45,6 +47,7 @@ public class MoveCubes : MonoBehaviour
             if (Input.GetKey(KeyCode.UpArrow)) { Jump(isGrounded); }
             if (Input.GetKey(KeyCode.DownArrow))
             {
+                RemoveVerticalAcceration();
                 float res = localCubePos.y -= 0.1f;
                 if (res < CUBE_HEIGHT / 2) localCubePos.y = CUBE_HEIGHT / 2;
             }
@@ -112,10 +115,40 @@ public class MoveCubes : MonoBehaviour
 
     private void Jump(bool isGrounded)
     {
-        float jumpForce = 7.5f;
+        float jumpForce = 1.5f;
         if (isGrounded)
         {
-            localCube.GetComponent<Rigidbody>().velocity = new Vector3(localCube.GetComponent<Rigidbody>().velocity.x, jumpForce, localCube.GetComponent<Rigidbody>().velocity.z);
+            StartCoroutine(DisableGravityForRise());
+            Rigidbody localCubeRb = localCube.GetComponent<Rigidbody>();
+            localCubeRb.velocity = new Vector3(localCubeRb.velocity.x, 6f, localCubeRb.velocity.z);
+            localCubeRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
         }
+    }
+
+    private void RemoveVerticalVelocity()
+    {
+        Rigidbody localCubeRb = localCube.GetComponent<Rigidbody>();
+        localCubeRb.velocity = new Vector3(localCubeRb.velocity.x, 0f, localCubeRb.velocity.z);
+    }
+
+        private void RemoveVerticalAcceration()
+    {
+        Rigidbody localCubeRb = localCube.GetComponent<Rigidbody>();
+        if (localCubeRb.velocity.y > 0) 
+            localCubeRb.velocity = new Vector3(localCubeRb.velocity.x, 0f, localCubeRb.velocity.z);
+    }
+
+        private IEnumerator DisableGravityForRise()
+    {
+        Rigidbody localCubeRb = localCube.GetComponent<Rigidbody>();
+
+        // Temporarily disable gravity for a brief period during the jump rise
+        localCubeRb.useGravity = false;
+        
+        yield return new WaitForSeconds(0.1f); // Let the cube rise fast for 0.1 seconds
+        
+        // Re-enable gravity for the normal fall
+        localCubeRb.useGravity = true;
     }
 }

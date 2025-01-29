@@ -23,27 +23,31 @@ public class MoveCubes : MonoBehaviour
         messaging.Log += processMessage;
         (new Thread(new ThreadStart(messaging.ReceiveMessages))).Start();
         localCubePos.x = 1.0f;
-        localCubePos.y = CUBE_HEIGHT/2;
+        localCubePos.y = CUBE_HEIGHT / 2;
         localCubePos.z = 1.0f;
         remoteCubePos.x = -1.0f;
-        remoteCubePos.y = CUBE_HEIGHT/2;
+        remoteCubePos.y = CUBE_HEIGHT / 2;
         remoteCubePos.z = 2.5f;
         localCube = GameObject.Find("CubeA");
-        remoteCube = GameObject.Find("CubeB"); 
+        remoteCube = GameObject.Find("CubeB");
         remoteCube.transform.position = remoteCubePos;
         localCube.transform.position = localCubePos;
     }
     // Update is called once per frame
     void Update()
     {
+        bool isGrounded = localCube.transform.position.y <= CUBE_HEIGHT / 2;
+        localCubePos.y = localCube.transform.position.y;
         if (Input.anyKey)
         {
             if (Input.GetKey(KeyCode.RightArrow)) { localCubePos.x += 0.1f; }
             if (Input.GetKey(KeyCode.LeftArrow)) { localCubePos.x -= 0.1f; }
-            if (Input.GetKey(KeyCode.UpArrow)) { localCubePos.y += 0.1f; }
-            if (Input.GetKey(KeyCode.DownArrow)) { 
+            if (Input.GetKey(KeyCode.UpArrow)) { Jump(isGrounded); }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
                 float res = localCubePos.y -= 0.1f;
-                if (res < CUBE_HEIGHT/2) localCubePos.y = CUBE_HEIGHT/2; }
+                if (res < CUBE_HEIGHT / 2) localCubePos.y = CUBE_HEIGHT / 2;
+            }
 
             localCube.transform.position = localCubePos;
             if (Vector3.Distance(localCubePos, remoteCubePos) < 2.0f)
@@ -85,24 +89,33 @@ public class MoveCubes : MonoBehaviour
     }
 
     private float ParseValue(string part, string expectedKey)
-{
-    try
     {
-        // Split by '=' and validate the key
-        string[] keyValue = part.Split('=');
-        if (keyValue.Length != 2 || keyValue[0].Trim() != expectedKey)
+        try
         {
-            Debug.LogError($"Malformed component: {part}. Expected format '{expectedKey} = value'.");
+            // Split by '=' and validate the key
+            string[] keyValue = part.Split('=');
+            if (keyValue.Length != 2 || keyValue[0].Trim() != expectedKey)
+            {
+                Debug.LogError($"Malformed component: {part}. Expected format '{expectedKey} = value'.");
+                return float.NaN;
+            }
+
+            // Parse the numeric value
+            return float.Parse(keyValue[1].Trim(), CultureInfo.InvariantCulture);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error parsing value for {expectedKey}: {ex}");
             return float.NaN;
         }
+    }
 
-        // Parse the numeric value
-        return float.Parse(keyValue[1].Trim(), CultureInfo.InvariantCulture);
-    }
-    catch (Exception ex)
+    private void Jump(bool isGrounded)
     {
-        Debug.LogError($"Error parsing value for {expectedKey}: {ex}");
-        return float.NaN;
+        float jumpForce = 7.5f;
+        if (isGrounded)
+        {
+            localCube.GetComponent<Rigidbody>().velocity = new Vector3(localCube.GetComponent<Rigidbody>().velocity.x, jumpForce, localCube.GetComponent<Rigidbody>().velocity.z);
+        }
     }
-}
 }

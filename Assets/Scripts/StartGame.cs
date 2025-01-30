@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class StartGame : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // Array of positions where cubes should be spawned
+    public Vector3[] spawnLocations;
 
-    // Update is called once per frame
+    // Cube prefab to spawn
+    public GameObject cubePrefab;
+
     void Update()
     {
-        
+
+    }
+
+    private void spawn() {
+
     }
 }

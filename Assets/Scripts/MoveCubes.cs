@@ -51,9 +51,7 @@ public class MoveCubes : MonoBehaviour
             }
 
             localCube.transform.position = localCubePos;
-            if (Vector3.Distance(localCubePos, remoteCubePos) < 2.0f)
-                // Debug.Log("Collision Detected");
-                messaging.sendMessage($"x = {localCubePos.x}, y = {localCubePos.y}, z = {localCubePos.z}");
+            messaging.sendMessage($"x = {localCubePos.x}, y = {localCubePos.y}, z = {localCubePos.z}");
         }
         remoteCube.transform.position = remoteCubePos;
     }

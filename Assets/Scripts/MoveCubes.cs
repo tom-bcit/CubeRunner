@@ -27,9 +27,7 @@ public class MoveCubes : MonoBehaviour
         localCubePos.z = 1.0f;
         remoteCubePos.x = -1.0f;
         remoteCubePos.y = CUBE_HEIGHT / 2;
-        remoteCubePos.z = 2.5f;
-        localCube = GameObject.Find("CubeA");
-        remoteCube = GameObject.Find("CubeB");
+
         remoteCube.transform.position = remoteCubePos;
         localCube.transform.position = localCubePos;
     }

@@ -61,7 +61,6 @@ namespace NetworkAPI
             mcastPort = 11000;
             string localIPAddress = GetLocalIPAddress();
 
-
             try
             {
                 mcastSocket = new Socket(AddressFamily.InterNetwork,
@@ -96,23 +95,21 @@ namespace NetworkAPI
                     if (!string.IsNullOrEmpty(message))
                     {
                         string senderIPAddress = ((IPEndPoint)remoteEP).Address.ToString();
-                        Debug.Log($"sender: {senderIPAddress}\tlocal:{localIPAddress}");
-                        if (senderIPAddress == localIPAddress)
+                        
+                        IPAddress senderIP = IPAddress.Parse(senderIPAddress);
+                        if (senderIP.Equals(localIP))
                         {
                             // Skip processing if the sender is the local machine
                             continue;
                         } else 
                         {
+                            Debug.Log($"sender: {senderIPAddress}\tlocal:{localIPAddress}");
                             Log(message);
-                        }
-                        
+                        }                        
                     }
-
                 }
-
                 mcastSocket.Close();
             }
-
             catch (Exception e)
             {
                 Debug.Log(e.ToString());

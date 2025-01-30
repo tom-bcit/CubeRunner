@@ -15,6 +15,14 @@ namespace NetworkAPI
 
         public event LogHandler Log;
 
+        public event Action<string> OnMessageReceived; // Event-based messaging
+        
+        private string multicastAddress;
+        private int multicastPort;
+        private Socket mcastSocket;
+        private CancellationTokenSource cancellationTokenSource;
+        private bool isReceiving;
+
         public void sendMessage(String message)
         {
             IPAddress mcastAddress;
@@ -110,8 +118,7 @@ namespace NetworkAPI
                 Debug.Log(e.ToString());
             }
         }
-
-
+        
         private string GetLocalIPAddress()
         {
             foreach (var ip in Dns.GetHostAddresses(Dns.GetHostName()))
@@ -123,8 +130,5 @@ namespace NetworkAPI
             }
             return "127.0.0.1"; // Default to localhost if no IP found
         }
-
     }
-
-
 }

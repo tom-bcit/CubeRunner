@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingObstacle : MonoBehaviour
+public class LeftMovingObstacle : MonoBehaviour
 {
     // Update is called once per frame automatically by Unity
     public float speed = 5f;

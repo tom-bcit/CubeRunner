@@ -27,6 +27,7 @@ public class MoveCubes : MonoBehaviour
         localCubePos.z = 1.0f;
         remoteCubePos.x = -1.0f;
         remoteCubePos.y = CUBE_HEIGHT / 2;
+        remoteCubePos.z = 1.0f;
 
         remoteCube.transform.position = remoteCubePos;
         localCube.transform.position = localCubePos;
@@ -147,4 +148,24 @@ public class MoveCubes : MonoBehaviour
         // Re-enable gravity for the normal fall
         localCubeRb.useGravity = true;
     }
+
+    void OnTriggerEnter(Collider other)
+{
+    if (other.CompareTag("Obstacle")) // Check if the colliding object is an obstacle
+    {
+        Debug.Log("An obstacle was hit!");
+
+        // Determine which player was hit
+        if (gameObject.CompareTag("CubeA"))
+        {
+            Debug.Log("Local player hit by obstacle!");
+            ScoreManager.instance.AddPoint(); // Update local player's score
+        }
+        else if (gameObject.CompareTag("CubeB"))
+        {
+            Debug.Log("Remote player hit by obstacle!");
+            // Handle remote player getting hit (e.g., send a network message)
+        }
+    }
+}
 }

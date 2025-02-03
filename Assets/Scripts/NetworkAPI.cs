@@ -127,5 +127,10 @@ namespace NetworkAPI
             }
             return "127.0.0.1"; // Default to localhost if no IP found
         }
+
+        async void Close()
+        {
+
+        }
     }
 }

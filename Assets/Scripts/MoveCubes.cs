@@ -170,4 +170,9 @@ public class MoveCubes : MonoBehaviour
             EnemyScoreManager.instance.CheckColor(); // Update remote player's score
         }
     }
+
+    private void OnApplicationQuit()
+    {
+        messaging.Close();
+    }
 }

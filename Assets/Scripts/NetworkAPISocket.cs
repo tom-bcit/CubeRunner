@@ -9,7 +9,7 @@ using System.Text;
 using System;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
-//using UnityEditor.VersionControl;
+
 namespace NetworkAPISocket
 {
     public class Messaging
@@ -23,15 +23,13 @@ namespace NetworkAPISocket
         public event LogHandler Log;
         public ClientWebSocket ws;
         public int? id = null;
+        public string hubAddress = "ws://192.168.43.107:5152/";
         public async void sendMessage(String message)
         {
-            //var ws = new ClientWebSocket();
-            
-            Debug.Log("state: " + ws.State);
             if (ws.State == WebSocketState.None)
             {
                 Debug.Log("Connecting to Server");
-                await ws.ConnectAsync(new Uri("ws://127.0.0.1:5152/"), CancellationToken.None);
+                await ws.ConnectAsync(new Uri(hubAddress), CancellationToken.None);
                 Debug.Log("Connected S");
                 RequestId();
             } else if (ws.State == WebSocketState.Connecting)
@@ -46,29 +44,16 @@ namespace NetworkAPISocket
                 await ws.SendAsync(new ArraySegment<byte>(messageBytes), WebSocketMessageType.Text, true, CancellationToken.None);
             }
             );
-            Debug.Log("sent message");
+            Debug.Log($"sent message: {message}");
             await sendTask;
-            //Console.ReadLine();
-
-            //await Task.WhenAny(sendTask);
-
-            //if (ws.State != WebSocketState.Closed)
-            //{
-            //    await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", CancellationToken.None);
-            //}
-
-            //Console.WriteLine("closed");
-
-            //await Task.WhenAll(sendTask);
+            
         }
         public async void ReceiveMessages()
-        {
-            //var ws = new ClientWebSocket();
-            Debug.Log("state: " + ws.State);
+        {   
             if (ws.State == WebSocketState.None)
             {
                 Debug.Log("Connecting to Server");
-                await ws.ConnectAsync(new Uri("ws://127.0.0.1:5152/"), CancellationToken.None);
+                await ws.ConnectAsync(new Uri(hubAddress), CancellationToken.None);
                 Debug.Log("Connected R");
                 RequestId();
             }
@@ -76,6 +61,7 @@ namespace NetworkAPISocket
             {
                 return;
             }
+            Debug.Log("RECEIVE STARTED");
             var receiveTask = Task.Run(async () =>
             {
                 var buffer = new byte[1024 * 4];
@@ -84,12 +70,13 @@ namespace NetworkAPISocket
                     var result = await ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
                     if (result.MessageType == WebSocketMessageType.Close) { break; }
                     var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
-                    Debug.Log(message);
+                    Debug.Log($"Message received: {message}");
                     string[] msgParts = message.Split('/');
-                    if (msgParts.Length >= 2 && msgParts[0] == "requestId")
+                    if (msgParts.Length >= 2 && id == null && msgParts[1] == "requestId")
                     {
-                        id = Int32.Parse(msgParts[1]);
-                    } else if (Int32.Parse(msgParts[0]) != id)
+                        Debug.Log("SET ID");
+                        id = Int32.Parse(msgParts[0]);
+                    } else if (Int32.Parse(msgParts[0]) != id && msgParts[1] != "requestId")
                     {
                         Log(msgParts[1]);
                     }
@@ -97,11 +84,7 @@ namespace NetworkAPISocket
             }
             );
             await receiveTask;
-
-            if (false) // IF MESSAGE IS GOOD
-            {
-                Log("good message");
-            }
+            Debug.Log("RECEIVE ENDED");
 
         }
 
@@ -109,11 +92,21 @@ namespace NetworkAPISocket
         {
             var sendTask = Task.Run(async () =>
             {
-                var messageBytes = Encoding.UTF8.GetBytes("requestId/null");
+                var messageBytes = Encoding.UTF8.GetBytes("null/requestId");
                 await ws.SendAsync(new ArraySegment<byte>(messageBytes), WebSocketMessageType.Text, true, CancellationToken.None);
             }
             );
             await sendTask;
+        }
+
+        public async void Close()
+        {
+            if (ws.State != WebSocketState.Closed && ws.State != WebSocketState.None)
+            {
+                await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", CancellationToken.None);
+            }
+
+            Debug.Log("socket closed");
         }
     }
 }

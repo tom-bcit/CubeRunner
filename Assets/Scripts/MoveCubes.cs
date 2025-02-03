@@ -36,15 +36,16 @@ public class MoveCubes : MonoBehaviour
     void Update()
     {
         bool isGrounded = localCube.transform.position.y <= CUBE_HEIGHT / 2;
+        localCubePos = localCube.transform.position;
         if (isGrounded) RemoveVerticalVelocity();
         else
             localCubePos.y = localCube.transform.position.y;
         if (Input.anyKey)
         {
             if (Input.GetKey(KeyCode.RightArrow)) { localCubePos.x += 0.1f; }
-            if (Input.GetKey(KeyCode.LeftArrow)) { localCubePos.x -= 0.1f; }
-            if (Input.GetKey(KeyCode.UpArrow)) { Jump(isGrounded); }
-            if (Input.GetKey(KeyCode.DownArrow))
+            else if (Input.GetKey(KeyCode.LeftArrow)) { localCubePos.x -= 0.1f; }
+            else if (Input.GetKey(KeyCode.UpArrow)) { Jump(isGrounded); }
+            else if (Input.GetKey(KeyCode.DownArrow))
             {
                 RemoveVerticalAcceration();
                 float res = localCubePos.y -= 0.1f;
@@ -159,7 +160,7 @@ public class MoveCubes : MonoBehaviour
             if (gameObject.CompareTag("CubeA"))
             {
                 Debug.Log("Local player hit by obstacle!");
-                PlayerScoreManager.instance.AddPoint();    
+                PlayerScoreManager.instance.AddPoint();
             }
             else if (gameObject.CompareTag("CubeB"))
             {

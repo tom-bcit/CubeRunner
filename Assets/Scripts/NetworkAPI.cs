@@ -15,6 +15,14 @@ namespace NetworkAPI
 
         public event LogHandler Log;
 
+        public event Action<string> OnMessageReceived; // Event-based messaging
+        
+        private string multicastAddress;
+        private int multicastPort;
+        private Socket mcastSocket;
+        private CancellationTokenSource cancellationTokenSource;
+        private bool isReceiving;
+
         public void sendMessage(String message)
         {
             IPAddress mcastAddress;
@@ -53,7 +61,6 @@ namespace NetworkAPI
             mcastPort = 11000;
             string localIPAddress = GetLocalIPAddress();
 
-
             try
             {
                 mcastSocket = new Socket(AddressFamily.InterNetwork,
@@ -88,30 +95,27 @@ namespace NetworkAPI
                     if (!string.IsNullOrEmpty(message))
                     {
                         string senderIPAddress = ((IPEndPoint)remoteEP).Address.ToString();
-                        Debug.Log($"sender: {senderIPAddress}\tlocal:{localIPAddress}");
-                        if (senderIPAddress == localIPAddress)
+                        
+                        IPAddress senderIP = IPAddress.Parse(senderIPAddress);
+                        if (senderIP.Equals(localIP))
                         {
                             // Skip processing if the sender is the local machine
                             continue;
                         } else 
                         {
+                            Debug.Log($"sender: {senderIPAddress}\tlocal:{localIPAddress}");
                             Log(message);
-                        }
-                        
+                        }                        
                     }
-
                 }
-
                 mcastSocket.Close();
             }
-
             catch (Exception e)
             {
                 Debug.Log(e.ToString());
             }
         }
-
-
+        
         private string GetLocalIPAddress()
         {
             foreach (var ip in Dns.GetHostAddresses(Dns.GetHostName()))
@@ -123,8 +127,5 @@ namespace NetworkAPI
             }
             return "127.0.0.1"; // Default to localhost if no IP found
         }
-
     }
-
-
 }

@@ -25,6 +25,7 @@ public class MoveCubes : MonoBehaviour
         localCubePos.z = 1.0f;
         remoteCubePos.x = -1.0f;
         remoteCubePos.y = CUBE_HEIGHT / 2;
+        remoteCubePos.z = 1.0f;
 
         remoteCube.transform.position = remoteCubePos;
         localCube.transform.position = localCubePos;
@@ -33,15 +34,16 @@ public class MoveCubes : MonoBehaviour
     void Update()
     {
         bool isGrounded = localCube.transform.position.y <= CUBE_HEIGHT / 2;
+        localCubePos = localCube.transform.position;
         if (isGrounded) RemoveVerticalVelocity();
         else
-        localCubePos.y = localCube.transform.position.y;
+            localCubePos.y = localCube.transform.position.y;
         if (Input.anyKey)
         {
             if (Input.GetKey(KeyCode.RightArrow)) { localCubePos.x += 0.1f; }
-            if (Input.GetKey(KeyCode.LeftArrow)) { localCubePos.x -= 0.1f; }
-            if (Input.GetKey(KeyCode.UpArrow)) { Jump(isGrounded); }
-            if (Input.GetKey(KeyCode.DownArrow))
+            else if (Input.GetKey(KeyCode.LeftArrow)) { localCubePos.x -= 0.1f; }
+            else if (Input.GetKey(KeyCode.UpArrow)) { Jump(isGrounded); }
+            else if (Input.GetKey(KeyCode.DownArrow))
             {
                 RemoveVerticalAcceration();
                 float res = localCubePos.y -= 0.1f;
@@ -49,9 +51,7 @@ public class MoveCubes : MonoBehaviour
             }
 
             localCube.transform.position = localCubePos;
-            if (Vector3.Distance(localCubePos, remoteCubePos) < 2.0f)
-                // Debug.Log("Collision Detected");
-                messaging.sendMessage($"x = {localCubePos.x}, y = {localCubePos.y}, z = {localCubePos.z}");
+            messaging.sendMessage($"x = {localCubePos.x}, y = {localCubePos.y}, z = {localCubePos.z}");
         }
         remoteCube.transform.position = remoteCubePos;
     }
@@ -128,23 +128,46 @@ public class MoveCubes : MonoBehaviour
         localCubeRb.velocity = new Vector3(localCubeRb.velocity.x, 0f, localCubeRb.velocity.z);
     }
 
-        private void RemoveVerticalAcceration()
+    private void RemoveVerticalAcceration()
     {
         Rigidbody localCubeRb = localCube.GetComponent<Rigidbody>();
-        if (localCubeRb.velocity.y > 0) 
+        if (localCubeRb.velocity.y > 0)
             localCubeRb.velocity = new Vector3(localCubeRb.velocity.x, 0f, localCubeRb.velocity.z);
     }
 
-        private IEnumerator DisableGravityForRise()
+    private IEnumerator DisableGravityForRise()
     {
         Rigidbody localCubeRb = localCube.GetComponent<Rigidbody>();
 
         // Temporarily disable gravity for a brief period during the jump rise
         localCubeRb.useGravity = false;
-        
+
         yield return new WaitForSeconds(0.1f); // Let the cube rise fast for 0.1 seconds
-        
+
         // Re-enable gravity for the normal fall
         localCubeRb.useGravity = true;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Obstacle")) // Check if the colliding object is an obstacle
+        {
+            Debug.Log("An obstacle was hit!");
+
+            // Determine which player was hit
+            if (gameObject.CompareTag("CubeA"))
+            {
+                Debug.Log("Local player hit by obstacle!");
+                PlayerScoreManager.instance.AddPoint();
+            }
+            else if (gameObject.CompareTag("CubeB"))
+            {
+                Debug.Log("Remote player hit by obstacle!");
+                EnemyScoreManager.instance.AddPoint();
+                // Handle remote player getting hit (e.g., send a network message)
+            }
+            PlayerScoreManager.instance.CheckColor(); // Update local player's score
+            EnemyScoreManager.instance.CheckColor(); // Update remote player's score
+        }
     }
 }

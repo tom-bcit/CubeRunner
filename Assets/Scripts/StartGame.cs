@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class StartGame : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject obstacleSpawner;
+    public GameObject obstacleSpawner2;
+    public GameObject startButton;
 
-    // Update is called once per frame
-    void Update()
+    public void OnStartButtonClick()
     {
-        
+        if (obstacleSpawner != null)
+        {
+            obstacleSpawner.SetActive(true);
+        }
+        if (obstacleSpawner2 != null)
+        {
+            obstacleSpawner2.SetActive(true);
+        }
+        if (startButton != null)
+        {
+            startButton.SetActive(false);
+        }
     }
 }

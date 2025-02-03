@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
-using System.Net;
-using System.Net.Sockets;
 using UnityEngine;
 using System.Text;
 using System;
@@ -14,7 +12,7 @@ public class MoveCubes : MonoBehaviour
     public GameObject localCube, remoteCube;
     public Vector3 localCubePos = new Vector3();
     public Vector3 remoteCubePos = new Vector3();
-    NetworkAPI.Messaging messaging = new NetworkAPI.Messaging();
+    NetworkAPISocket.Messaging messaging = new NetworkAPISocket.Messaging();
     void Awake() { }
     void OnEnable() { }
     void Start()

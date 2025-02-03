@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class StartGame : MonoBehaviour
 {
-    // Array of positions where cubes should be spawned
-    public Vector3[] spawnLocations;
+    public GameObject obstacleSpawner;
+    public GameObject obstacleSpawner2;
+    public GameObject startButton;
 
-    // Cube prefab to spawn
-    public GameObject cubePrefab;
-
-    void Update()
+    public void OnStartButtonClick()
     {
-
-    }
-
-    private void spawn() {
-
+        if (obstacleSpawner != null)
+        {
+            obstacleSpawner.SetActive(true);
+        }
+        if (obstacleSpawner2 != null)
+        {
+            obstacleSpawner2.SetActive(true);
+        }
+        if (startButton != null)
+        {
+            startButton.SetActive(false);
+        }
     }
 }

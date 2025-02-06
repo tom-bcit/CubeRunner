@@ -12,11 +12,15 @@ public class ObstacleSpawner : MonoBehaviour
     public float spawnX;
     public float spawnY = 30f; // Y position of spawning
     public string direction;
+    public GameObject GameManager;
 
     void Start()
     {
         spawnX = MyObstacleSpawner.transform.position.x;
-        StartCoroutine(SpawnObstacle());
+        if (GameManager.GetComponent<PlayerSelection>().PlayerRole == "Host")
+        {
+            StartCoroutine(SpawnObstacle());
+        }
     }
 
     IEnumerator SpawnObstacle()
@@ -26,6 +30,7 @@ public class ObstacleSpawner : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
 
             Vector3 spawnPosition = new Vector3(spawnX, spawnY, 0);
+            
             if (direction == "left")
             {
                 Instantiate(obstaclePrefabLeft, spawnPosition, Quaternion.identity);

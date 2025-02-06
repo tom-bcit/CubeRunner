@@ -1476,7 +1476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1087096263
 Transform:
   m_ObjectHideFlags: 0
@@ -1512,6 +1512,7 @@ MonoBehaviour:
   spawnX: 10
   spawnY: 0
   direction: left
+  GameManager: {fileID: 1286669715}
 --- !u!1 &1227736318
 GameObject:
   m_ObjectHideFlags: 0
@@ -2023,6 +2024,7 @@ MonoBehaviour:
   spawnX: -10
   spawnY: 30
   direction: right
+  GameManager: {fileID: 1286669715}
 --- !u!1 &1640932072
 GameObject:
   m_ObjectHideFlags: 0

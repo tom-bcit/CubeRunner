@@ -5,7 +5,7 @@ using UnityEngine;
 public class LeftMovingObstacle : MonoBehaviour
 {
     // Update is called once per frame automatically by Unity
-    public float speed = 5f;
+    public float speed = -5f;
     public float lifetime = 10f; // Time before the obstacle is destroyed
     void Start()
     {

@@ -1504,11 +1504,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97e6ea28c7c714b906494e45cf4802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePrefab: {fileID: 6872806212563684578, guid: a985f26990fc0ea49a6d286d3c3c6dab, type: 3}
+  obstaclePrefabLeft: {fileID: 6872806212563684578, guid: a985f26990fc0ea49a6d286d3c3c6dab, type: 3}
+  obstaclePrefabRight: {fileID: 6872806212563684578, guid: 0a5d674860f518b44b534c4013a2379b, type: 3}
   minSpawnTime: 1
   maxSpawnTime: 3
+  MyObstacleSpawner: {fileID: 1087096262}
   spawnX: 10
   spawnY: 0
+  direction: left
 --- !u!1 &1227736318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,6 +1727,7 @@ MonoBehaviour:
   Player1Button: {fileID: 1709381665}
   StartMenu: {fileID: 566927921}
   SelectionMenu: {fileID: 2112055678}
+  PlayerRole: 
 --- !u!1 &1546069619
 GameObject:
   m_ObjectHideFlags: 0
@@ -2008,14 +2012,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1615290975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49919fca0bf3500408960b098e0be6da, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e97e6ea28c7c714b906494e45cf4802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePrefab: {fileID: 6872806212563684578, guid: 0a5d674860f518b44b534c4013a2379b, type: 3}
+  obstaclePrefabLeft: {fileID: 6872806212563684578, guid: a985f26990fc0ea49a6d286d3c3c6dab, type: 3}
+  obstaclePrefabRight: {fileID: 6872806212563684578, guid: 0a5d674860f518b44b534c4013a2379b, type: 3}
   minSpawnTime: 1
   maxSpawnTime: 4
+  MyObstacleSpawner: {fileID: 1615290975}
   spawnX: -10
   spawnY: 30
+  direction: right
 --- !u!1 &1640932072
 GameObject:
   m_ObjectHideFlags: 0

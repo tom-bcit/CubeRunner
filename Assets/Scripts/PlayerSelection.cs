@@ -10,6 +10,7 @@ public class PlayerSelection : MonoBehaviour
     public GameObject Player1Button;
     public GameObject StartMenu;
     public GameObject SelectionMenu;
+    public string PlayerRole;
 
     public void OnHostButtonClick()
     {
@@ -19,6 +20,7 @@ public class PlayerSelection : MonoBehaviour
         CubeB.GetComponent<MoveCubes>().remoteCube = CubeB;
         SelectionMenu.SetActive(false);
         StartMenu.SetActive(true);
+        PlayerRole = "Host";
     }
 
     public void OnPlayer1ButtonClick()
@@ -29,6 +31,7 @@ public class PlayerSelection : MonoBehaviour
         CubeB.GetComponent<MoveCubes>().remoteCube = CubeA;
         SelectionMenu.SetActive(false);
         StartMenu.SetActive(true);
+        PlayerRole = "Player1";
     }
 
 }

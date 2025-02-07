@@ -9,16 +9,18 @@ using System;
 public class MoveCubes : MonoBehaviour
 {
     private float CUBE_HEIGHT = 1.0f;
+    public int ID;
     public GameObject localCube, remoteCube;
     public Vector3 localCubePos = new Vector3();
     public Vector3 remoteCubePos = new Vector3();
     //NetworkAPI.Messaging messaging = new NetworkAPI.Messaging();
-     NetworkAPISocket.Messaging messaging = new NetworkAPISocket.Messaging();
+    NetworkAPISocket.Messaging messaging = new NetworkAPISocket.Messaging();
     void Awake() { }
     void OnEnable() { }
     void Start()
     {
         Debug.Log("Start");
+        messaging.setId(ID);
         messaging.Log += processMessage;
         (new Thread(new ThreadStart(messaging.ReceiveMessages))).Start();
         localCubePos.x = 1.0f;

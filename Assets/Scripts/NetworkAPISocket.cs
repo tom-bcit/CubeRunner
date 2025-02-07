@@ -18,12 +18,21 @@ namespace NetworkAPISocket
         {
             ws = new ClientWebSocket();
         }
+        public Messaging(int ID)
+        {
+            ws = new ClientWebSocket();
+            id = ID;
+        }
         public delegate void LogHandler(string message);
 
         public event LogHandler Log;
         public ClientWebSocket ws;
         public int? id = null;
-        public string hubAddress = "ws://127.0.0.1:5152"; //"ws://192.168.43.107:5152/";
+        public string hubAddress = "ws://127.0.0.1:5152/"; //"ws://192.168.43.107:5152/";
+        public void setId(int ID)
+        {
+            id = ID;
+        }
         public async void sendMessage(String message)
         {
             if (ws.State == WebSocketState.None)
@@ -31,7 +40,7 @@ namespace NetworkAPISocket
                 Debug.Log("Connecting to Server");
                 await ws.ConnectAsync(new Uri(hubAddress), CancellationToken.None);
                 Debug.Log("Connected S");
-                RequestId();
+                //RequestId();
             } else if (ws.State == WebSocketState.Connecting)
             {
                 return;
@@ -55,7 +64,7 @@ namespace NetworkAPISocket
                 Debug.Log("Connecting to Server");
                 await ws.ConnectAsync(new Uri(hubAddress), CancellationToken.None);
                 Debug.Log("Connected R");
-                RequestId();
+                //RequestId();
             }
             else if (ws.State == WebSocketState.Connecting)
             {
@@ -70,7 +79,7 @@ namespace NetworkAPISocket
                     var result = await ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
                     if (result.MessageType == WebSocketMessageType.Close) { break; }
                     var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
-                    Debug.Log($"Message received: {message}");
+                    Debug.Log($"Socket Message received: {message}");
                     string[] msgParts = message.Split('/');
 
                     if (msgParts.Length >= 2 && id == null && msgParts[1] == "requestId")
@@ -85,7 +94,7 @@ namespace NetworkAPISocket
 
                     //if (msgParts.Length >= 2 && msgParts[1] != "requestId")
                     //{
-                    //    //Debug.Log("SET ID");
+                    //    Debug.Log("LOGGING " + msgParts[1]);
                     //    //id = Int32.Parse(msgParts[0]);
                     //    Log(msgParts[1]);
                     //}

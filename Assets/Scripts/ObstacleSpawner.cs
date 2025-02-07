@@ -13,18 +13,22 @@ public class ObstacleSpawner : MonoBehaviour
     public float minSpawnTime = 1f; // Minimum time between spawns
     public float maxSpawnTime = 4f; // Maximum time between spawns
     public GameObject MyObstacleSpawner;
+    public int ID;
     public float spawnX;
     public float spawnY = 30f; // Y position of spawning
     public string direction;
     public GameObject GameManager;
+    public string role;
     NetworkAPISocket.Messaging messaging = new NetworkAPISocket.Messaging();
 
     void Start()
     {
+        messaging.setId(ID);
         messaging.Log += processMessage;
         (new Thread(new ThreadStart(messaging.ReceiveMessages))).Start();
         spawnX = MyObstacleSpawner.transform.position.x;
-        if (GameManager.GetComponent<PlayerSelection>().PlayerRole == "Host")
+        role = GameManager.GetComponent<PlayerSelection>().PlayerRole;
+        if (role == "Host")
         {
             StartCoroutine(SpawnObstacles());
         }
@@ -59,8 +63,8 @@ public class ObstacleSpawner : MonoBehaviour
 
     public void processMessage(string message)
     {
-        Debug.Log("Spawner Received message: " + message);
-        if (GameManager.GetComponent<PlayerSelection>().PlayerRole != "Host")
+        Debug.Log("Spawner Received message: " + message + ", ROLE: " + role);
+        if (role != "Host")
         {
             //Debug.Log("Message Received: " + message);
             string[] words = message.Split(' ');

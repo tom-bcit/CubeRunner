@@ -12,8 +12,8 @@ public class MoveCubes : MonoBehaviour
     public GameObject localCube, remoteCube;
     public Vector3 localCubePos = new Vector3();
     public Vector3 remoteCubePos = new Vector3();
-    NetworkAPI.Messaging messaging = new NetworkAPI.Messaging();
-    // NetworkAPISocket.Messaging messaging = new NetworkAPISocket.Messaging();
+    //NetworkAPI.Messaging messaging = new NetworkAPI.Messaging();
+     NetworkAPISocket.Messaging messaging = new NetworkAPISocket.Messaging();
     void Awake() { }
     void OnEnable() { }
     void Start()
@@ -60,6 +60,10 @@ public class MoveCubes : MonoBehaviour
 
     public void processMessage(string message)
     {
+        //if (GameManager.GetComponent<PlayerSelection>().PlayerRole == "Host")
+        //{
+        //    // Handle message here
+        //}
         Debug.Log("Message Received: " + message);
         string[] words = message.Split(' ');
         string[] parts = message.Split(new string[] { ", " }, StringSplitOptions.None);

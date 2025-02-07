@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\Users\\Mike\\Documents\\Classes\\Term 4\\comp4941_4945\\assn2\\CubeRunner\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|c:\\users\\mike\\documents\\classes\\term 4\\comp4941_4945\\assn2\\cuberunner\\assets\\scripts\\obstaclespawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\obstaclespawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|C:\\Users\\Mike\\Documents\\Classes\\Term 4\\comp4941_4945\\assn2\\CubeRunner\\assets\\scripts\\networkapisocket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\networkapisocket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|C:\\Users\\Mike\\Documents\\Classes\\Term 4\\comp4941_4945\\assn2\\CubeRunner\\assets\\scripts\\movecubes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\movecubes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|c:\\users\\mike\\documents\\classes\\term 4\\comp4941_4945\\assn2\\cuberunner\\assets\\scripts\\leftmovingobstacle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\leftmovingobstacle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,20 +23,8 @@
       "RelativeMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\rightmovingobstacle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|c:\\users\\mike\\documents\\classes\\term 4\\comp4941_4945\\assn2\\cuberunner\\assets\\scripts\\obstaclespawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\obstaclespawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|C:\\Users\\Mike\\Documents\\Classes\\Term 4\\comp4941_4945\\assn2\\CubeRunner\\assets\\scripts\\movecubes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\movecubes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|C:\\Users\\Mike\\Documents\\Classes\\Term 4\\comp4941_4945\\assn2\\CubeRunner\\assets\\scripts\\networkapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\networkapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|C:\\Users\\Mike\\Documents\\Classes\\Term 4\\comp4941_4945\\assn2\\CubeRunner\\assets\\scripts\\networkapisocket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E67A532A-156C-C563-1F3D-F09F01ECEC96}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\networkapisocket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,11 +34,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "RightMovingObstacle.cs",
               "DocumentMoniker": "C:\\Users\\Mike\\Documents\\Classes\\Term 4\\comp4941_4945\\assn2\\CubeRunner\\Assets\\Scripts\\RightMovingObstacle.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\RightMovingObstacle.cs",
@@ -51,7 +51,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "LeftMovingObstacle.cs",
               "DocumentMoniker": "C:\\Users\\Mike\\Documents\\Classes\\Term 4\\comp4941_4945\\assn2\\CubeRunner\\Assets\\Scripts\\LeftMovingObstacle.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\LeftMovingObstacle.cs",
@@ -64,45 +64,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "ObstacleSpawner.cs",
               "DocumentMoniker": "C:\\Users\\Mike\\Documents\\Classes\\Term 4\\comp4941_4945\\assn2\\CubeRunner\\Assets\\Scripts\\ObstacleSpawner.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ObstacleSpawner.cs",
               "ToolTip": "C:\\Users\\Mike\\Documents\\Classes\\Term 4\\comp4941_4945\\assn2\\CubeRunner\\Assets\\Scripts\\ObstacleSpawner.cs",
               "RelativeToolTip": "Assets\\Scripts\\ObstacleSpawner.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAQwC0AAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAACAAAAAAAAAAAAAAwBQAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-06T22:19:33.507Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "NetworkAPISocket.cs",
               "DocumentMoniker": "C:\\Users\\Mike\\Documents\\Classes\\Term 4\\comp4941_4945\\assn2\\CubeRunner\\Assets\\Scripts\\NetworkAPISocket.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\NetworkAPISocket.cs",
               "ToolTip": "C:\\Users\\Mike\\Documents\\Classes\\Term 4\\comp4941_4945\\assn2\\CubeRunner\\Assets\\Scripts\\NetworkAPISocket.cs",
               "RelativeToolTip": "Assets\\Scripts\\NetworkAPISocket.cs",
-              "ViewState": "AgIAAFAAAAAAAAAAAAAgwDMAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAxwBkAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T03:54:56.524Z"
+              "WhenOpened": "2025-01-31T03:54:56.524Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "MoveCubes.cs",
               "DocumentMoniker": "C:\\Users\\Mike\\Documents\\Classes\\Term 4\\comp4941_4945\\assn2\\CubeRunner\\Assets\\Scripts\\MoveCubes.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MoveCubes.cs",
               "ToolTip": "C:\\Users\\Mike\\Documents\\Classes\\Term 4\\comp4941_4945\\assn2\\CubeRunner\\Assets\\Scripts\\MoveCubes.cs",
               "RelativeToolTip": "Assets\\Scripts\\MoveCubes.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAswDsAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAACUAAAAAAAAAAAAkwDUAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-30T21:04:18.94Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "NetworkAPI.cs",
               "DocumentMoniker": "C:\\Users\\Mike\\Documents\\Classes\\Term 4\\comp4941_4945\\assn2\\CubeRunner\\Assets\\Scripts\\NetworkAPI.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\NetworkAPI.cs",

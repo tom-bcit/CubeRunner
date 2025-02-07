@@ -72,14 +72,24 @@ namespace NetworkAPISocket
                     var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
                     Debug.Log($"Message received: {message}");
                     string[] msgParts = message.Split('/');
+
                     if (msgParts.Length >= 2 && id == null && msgParts[1] == "requestId")
                     {
                         Debug.Log("SET ID");
                         id = Int32.Parse(msgParts[0]);
-                    } else if (Int32.Parse(msgParts[0]) != id && msgParts[1] != "requestId")
+                    }
+                    else if (Int32.Parse(msgParts[0]) != id && msgParts[1] != "requestId")
                     {
                         Log(msgParts[1]);
                     }
+
+                    //if (msgParts.Length >= 2 && msgParts[1] != "requestId")
+                    //{
+                    //    //Debug.Log("SET ID");
+                    //    //id = Int32.Parse(msgParts[0]);
+                    //    Log(msgParts[1]);
+                    //}
+
                 }
             }
             );

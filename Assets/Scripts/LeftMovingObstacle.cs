@@ -9,7 +9,7 @@ public class LeftMovingObstacle : MonoBehaviour
     public float lifetime = 10f; // Time before the obstacle is destroyed
     void Start()
     {
-        transform.position = new Vector3(15f, 0.52f + Random.Range(0, 3), 1f); // Set the spawn position
+        //transform.position = new Vector3(15f, 0.52f + Random.Range(0, 3), 1f); // Set the spawn position
         Destroy(gameObject, lifetime); // Destroy after 'lifetime' seconds
     }
 

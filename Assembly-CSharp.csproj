@@ -59,7 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\LeftMovingObstacle.cs" />
-    <Compile Include="Assets\Scripts\ObstacleSpawnerShootingLeft.cs" />
+    <Compile Include="Assets\Scripts\ObstacleSpawner.cs" />
+    <Compile Include="Assets\Scripts\PlayerSelection.cs" />
     <Compile Include="Assets\Scripts\EnemyScoreManager.cs" />
     <Compile Include="Assets\Scripts\NetworkAPI.cs" />
     <Compile Include="Assets\Scripts\PlayerScoreManager.cs" />
@@ -67,7 +68,6 @@
     <Compile Include="Assets\Scripts\RightMovingObstacle.cs" />
     <Compile Include="Assets\Scripts\MoveCubes.cs" />
     <Compile Include="Assets\Scripts\NetworkAPISocket.cs" />
-    <Compile Include="Assets\Scripts\ObstacleSpawnerShootingRight.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

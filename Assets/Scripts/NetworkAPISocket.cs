@@ -23,7 +23,7 @@ namespace NetworkAPISocket
         public event LogHandler Log;
         public ClientWebSocket ws;
         public int? id = null;
-        public string hubAddress = "ws://192.168.43.107:5152/";
+        public string hubAddress = "ws://127.0.0.1:5152"; //"ws://192.168.43.107:5152/";
         public async void sendMessage(String message)
         {
             if (ws.State == WebSocketState.None)
